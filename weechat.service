@@ -1,0 +1,14 @@
+[Unit]
+Description=WeeChat daemon. Attach with screen -r weechat
+After=network.target
+
+[Service]
+Type=forking
+User=robin
+Group=robin
+ExecStart=/usr/bin/bash -c "/usr/bin/screen -dmS weechat weechat"
+ExecStop=/usr/bin/bash -c "/usr/bin/screen -S weechat -X stuff \"/quit^M\""
+ExecStop=/usr/bin/sleep 2
+
+[Install]
+WantedBy=multi-user.target
